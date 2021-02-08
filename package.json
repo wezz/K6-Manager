@@ -1,0 +1,22 @@
+{
+  "name": "k6-manager",
+  "version": "1.0.0",
+  "description": "Manage K6 tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wezz/K6-Manager.git"
+  },
+  "keywords": [
+    "k6"
+  ],
+  "author": "Wezz Balk (wezz@wezz.se)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/wezz/K6-Manager/issues"
+  },
+  "homepage": "https://github.com/wezz/K6-Manager#readme"
+}
