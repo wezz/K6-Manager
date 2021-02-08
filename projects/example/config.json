@@ -1,0 +1,45 @@
+{
+	"name": "Example project",
+	"environments": {
+		"dev": {
+			"name": "Development environment (localhost)",
+			"envname": "dev",
+			"baseurl": "https://localhost:44344"
+		},
+		"prod": {
+			"name": "Production environment",
+			"envname": "prod",
+			"baseurl": "PRODUCTIONBASEURL"
+		}
+	},
+	"stages": {
+		"quick": {
+			"name": "Quick and dirty, 1.5m 40u",
+			"stages": [
+				{ "duration": "30s", "target": 20 },
+				{ "duration": "1m", "target": 40 }
+			]
+		},
+		"serious": {
+			"name": "Serious - 29m 600u",
+			"stages": [
+				{ "duration": "4m", "target": 100 },
+				{ "duration": "1m", "target": 300 },
+				{ "duration": "4m", "target": 300 },
+				{ "duration": "2m", "target": 500 },
+				{ "duration": "8m", "target": 500 },
+				{ "duration": "10m", "target": 600 }
+			]
+		}
+	},
+	"suites": {
+		"startpage": {
+			"Name": "Startpage",
+			"path": "startpage.json"
+		},
+		"landingpages": {
+			"startpage": "Landingpages",
+			"path": "landingpages.json"
+		}
+	}
+}

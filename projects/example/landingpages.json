@@ -1,0 +1,27 @@
+{
+	"startpage": {
+		"dev": {
+		  "url": "/"
+		},
+		"prod": {
+		  "url": "/"
+		}
+	},
+	"about": {
+		"dev": {
+			"url": "/aboutus"
+		},
+		"prod": {
+			"url": "/aboutus"
+		}
+	},
+	"products": {
+		"dev": {
+			"url": "/products"
+		},
+		"prod": {
+			"url": "/products"
+		}
+	}
+
+}

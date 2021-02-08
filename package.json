@@ -5,7 +5,8 @@
   "main": "index.mjs",
   "type": "module",
   "scripts": {
-    "start": "cross-env node index.mjs"
+    "start": "cross-env node index.mjs",
+    "exampleproj": "cross-env K6_PROJECTPATH=./projects K6_PROJECT=example node index.mjs"
   },
   "repository": {
     "type": "git",

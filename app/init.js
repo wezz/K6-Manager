@@ -1,31 +1,31 @@
-
 import enquirer from 'enquirer';
 import { getProjects } from "./helpers/directory.js";
-
-// Get current environment configuration
-
+import  { initiateProject } from "./helpers/project.js";
 
 export default async function app() {
-	projectStart().then((exitOption) => {
-		
-	}).catch((ex) => {
-		console.log('catch ex', ex);
-	});
-	
+	const initialProject = process.env["K6_PROJECT"] ?? null;
+	if (initialProject) {
+		openProject(initialProject);
+	}
+	else {
+		showStartView().then((exitOption) => {
+		}).catch((ex) => {
+			console.log('catch ex', ex);
+		});
+	}
 }
 
-async function projectStart()
+async function showStartView()
 {
 	const startOption = await showStartPrompt();
 	switch(startOption) {
 		case 'openproject':
 			const projectToRun = await showProjectListPrompt();
-				console.log('projectToRun', projectToRun);
-				if (projectToRun === "returntostart"){
-					projectStart();
+				if (projectToRun === "back"){
+					showStartView();
 				}
 				else if (projectToRun) {
-					runProject(projectToRun);
+					openProject(projectToRun);
 				}
 			break;
 		case 'exit':
@@ -35,8 +35,26 @@ async function projectStart()
 	}
 }
 
+function openProject(projectname)
+{
+	initiateProject(projectname).then((status) => {
+		console.log('project run status', status);
+		if (status === 'error'){
+			console.log(`Something went wrong in the project "${projectToRun}"`);
+		}
+		if (status === 'back'){
+			showStartView();
+		}
+		
+	}).catch((ex) => {
+		console.log('project run exception', ex);
+	});
+}
+
 async function showStartPrompt()
 {
+	console.clear();
+	console.log(`### K6 Manager - Start`);
 	const startprompt = new enquirer.Select({
 		name: "startoption",
 		message: "What would you like to do?",
@@ -49,9 +67,11 @@ async function showStartPrompt()
 }
 
 async function showProjectListPrompt() {
+	console.clear();
+	console.log(`### K6 Manager - Select project`);
 	const projects = getProjects();
 	const projectOptions  = projects.map((projectDir) => { return { name: projectDir.name, message: `Project: ${projectDir.name}`}; });
-	projectOptions.push( { name : 'returntostart', message: 'Return to start' });
+	projectOptions.push( { name : 'back', message: 'Return to start' });
 	const projectprompt = new enquirer.Select({
 		name: "project",
 		message: "Select a project",
@@ -59,7 +79,3 @@ async function showProjectListPrompt() {
 	});
 	return await projectprompt.run();
 };
-
-function runProject(projectname) {
-	console.log('projectname', projectname);
-}
